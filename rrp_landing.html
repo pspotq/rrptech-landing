@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RRP Technologies — Daily Intelligence Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0a0f1e;
+  --ink2:#1a2035;
+  --ink3:#2c3550;
+  --mist:#f4f6fb;
+  --mist2:#eaecf4;
+  --white:#ffffff;
+  --accent:#1a56db;
+  --accent2:#0e3aa8;
+  --green:#0d7a4e;
+  --green-bg:#edfaf3;
+  --red:#c0392b;
+  --gold:#b8860b;
+  --gold-bg:#fdf9ed;
+  --text:#1c2340;
+  --text2:#4a5270;
+  --text3:#8892aa;
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--mist2);padding:0 5%;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);letter-spacing:0.05em}
+.nav-logo span{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;font-size:13px;font-weight:500;padding:8px 20px;border-radius:6px;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--accent2)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;background:var(--white);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,86,219,0.06) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(13,122,78,0.04) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-h1{font-size:clamp(36px,4.5vw,58px);font-weight:600;line-height:1.1;color:var(--ink);letter-spacing:-0.02em;margin-bottom:24px}
+.hero-h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:17px;color:var(--text2);line-height:1.7;margin-bottom:36px;max-width:480px;font-weight:300}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;font-size:15px;font-weight:500;padding:14px 28px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;letter-spacing:-0.01em}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-primary svg{width:16px;height:16px}
+.btn-ghost{background:transparent;color:var(--text);font-size:15px;font-weight:400;padding:14px 20px;border-radius:8px;text-decoration:none;border:1px solid var(--mist2);transition:all 0.2s}
+.btn-ghost:hover{border-color:var(--ink3);background:var(--mist)}
+.hero-proof{display:flex;align-items:center;gap:16px;margin-top:24px}
+.hero-proof-text{font-size:13px;color:var(--text3)}
+.hero-proof-text strong{color:var(--green);font-weight:500}
+
+/* HERO CARD */
+.hero-card{background:var(--ink);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(26,86,219,0.3) 0%,transparent 70%);border-radius:50%}
+.hc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.hc-title{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.hc-date{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3)}
+.hc-signal{margin-bottom:20px}
+.hc-signal-label{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:6px}
+.hc-signal-val{font-size:13px;font-weight:500;color:rgba(255,255,255,0.9);font-family:var(--mono)}
+.hc-divider{height:1px;background:rgba(255,255,255,0.08);margin:16px 0}
+.hc-picks{display:flex;flex-direction:column;gap:8px}
+.hc-pick{display:flex;align-items:center;gap:10px}
+.hc-pick-tag{font-family:var(--mono);font-size:10px;font-weight:500;padding:2px 8px;border-radius:4px;letter-spacing:0.06em;flex-shrink:0}
+.tag-buy{background:rgba(13,122,78,0.25);color:#4ade80}
+.tag-watch{background:rgba(184,134,11,0.2);color:#fbbf24}
+.hc-pick-coin{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.8);font-weight:500;width:80px}
+.hc-pick-detail{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.35)}
+.hc-pick-prob{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto}
+.hc-blur-row{filter:blur(4px);opacity:0.4;pointer-events:none}
+.hc-lock{text-align:center;padding:14px;margin-top:4px}
+.hc-lock-text{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px}
+.hc-lock-btn{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:500;padding:8px 18px;border-radius:6px;text-decoration:none;letter-spacing:0.02em}
+
+/* TICKER */
+.ticker-wrap{background:var(--ink);padding:12px 0;overflow:hidden;border-top:1px solid var(--ink2);border-bottom:1px solid var(--ink2)}
+.ticker{display:flex;gap:0;animation:ticker 30s linear infinite;white-space:nowrap}
+.ticker-item{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.5);padding:0 32px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ticker-item .up{color:#4ade80}
+.ticker-item .dn{color:#f87171}
+.ticker-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.2)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* STATS */
+.stats{padding:80px 5%;background:var(--mist)}
+.stats-inner{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent)}
+.section-h2{font-size:clamp(26px,3vw,38px);font-weight:600;color:var(--ink);letter-spacing:-0.02em;margin-bottom:8px}
+.section-sub{font-size:16px;color:var(--text2);font-weight:300;margin-bottom:48px;max-width:520px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.stat-card{background:var(--white);border-radius:var(--radius);padding:28px;border:1px solid var(--mist2);position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity 0.2s}
+.stat-card:hover::after{opacity:1}
+.stat-system{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:var(--text3);text-transform:uppercase;margin-bottom:16px}
+.stat-value{font-size:36px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;margin-bottom:4px;font-family:var(--mono)}
+.stat-value.pos{color:var(--green)}
+.stat-value.neg{color:var(--red)}
+.stat-label{font-size:13px;color:var(--text2)}
+.stat-meta{margin-top:16px;padding-top:16px;border-top:1px solid var(--mist2);display:flex;flex-direction:column;gap:6px}
+.stat-row{display:flex;justify-content:space-between;font-size:12px}
+.stat-row-label{color:var(--text3)}
+.stat-row-val{color:var(--text);font-weight:500;font-family:var(--mono)}
+
+/* HOW IT WORKS */
+.how{padding:80px 5%;background:var(--white)}
+.how-inner{max-width:1100px;margin:0 auto}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
+.how-card{padding:32px;border-radius:var(--radius);background:var(--mist);border:1px solid var(--mist2)}
+.how-num{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:500;margin-bottom:16px;letter-spacing:0.1em}
+.how-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:10px;letter-spacing:-0.01em}
+.how-body{font-size:14px;color:var(--text2);line-height:1.7;font-weight:300}
+
+/* MODELS */
+.models{padding:80px 5%;background:var(--ink);color:#fff}
+.models-inner{max-width:1100px;margin:0 auto}
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.model-card{background:var(--ink2);border-radius:var(--radius);padding:28px;border:1px solid var(--ink3)}
+.model-icon{width:36px;height:36px;border-radius:8px;background:rgba(26,86,219,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:16px}
+.model-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:8px;letter-spacing:-0.01em}
+.model-body{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:300}
+.model-stat{margin-top:16px;padding-top:16px;border-top:1px solid var(--ink3);font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.6)}
+.model-stat strong{color:#4ade80}
+.models .section-eyebrow{color:rgba(255,255,255,0.4)}
+.models .section-eyebrow::before{background:rgba(255,255,255,0.2)}
+.models .section-h2{color:#fff}
+.models .section-sub{color:rgba(255,255,255,0.5)}
+
+/* SAMPLE */
+.sample{padding:80px 5%;background:var(--mist)}
+.sample-inner{max-width:1100px;margin:0 auto}
+.sample-window{background:var(--ink);border-radius:16px;overflow:hidden;margin-top:48px;border:1px solid var(--ink2)}
+.sample-topbar{background:var(--ink2);padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--ink3)}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-r{background:#ff5f57}
+.dot-y{background:#febc2e}
+.dot-g{background:#28c840}
+.sample-title{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.3);margin-left:8px;letter-spacing:0.1em}
+.sample-body{padding:32px;font-family:var(--mono);font-size:13px;line-height:2;color:rgba(255,255,255,0.7)}
+.s-head{color:rgba(255,255,255,0.3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:4px}
+.s-val{color:rgba(255,255,255,0.9);font-weight:500}
+.s-green{color:#4ade80}
+.s-gold{color:#fbbf24}
+.s-red{color:#f87171}
+.s-dim{color:rgba(255,255,255,0.3)}
+.s-rule{border:none;border-top:1px solid rgba(255,255,255,0.08);margin:16px 0}
+.sample-blur{filter:blur(5px);opacity:0.5;user-select:none;pointer-events:none}
+.sample-gate{text-align:center;padding:32px;border-top:1px solid rgba(255,255,255,0.08)}
+.sample-gate-text{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:16px}
+.sample-gate-btn{display:inline-block;background:var(--accent);color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:8px;text-decoration:none}
+
+/* CTA */
+.cta{padding:100px 5%;background:var(--white);text-align:center}
+.cta-inner{max-width:600px;margin:0 auto}
+.cta h2{font-size:clamp(30px,4vw,48px);font-weight:600;color:var(--ink);letter-spacing:-0.02em;margin-bottom:16px}
+.cta p{font-size:17px;color:var(--text2);font-weight:300;margin-bottom:40px;line-height:1.7}
+.cta-price{display:inline-flex;align-items:baseline;gap:6px;margin-bottom:32px}
+.cta-price-amt{font-size:42px;font-weight:600;color:var(--ink);font-family:var(--mono);letter-spacing:-0.02em}
+.cta-price-per{font-size:15px;color:var(--text3)}
+.cta-features{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;text-align:left;background:var(--mist);border-radius:var(--radius);padding:24px}
+.cta-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.cta-feature::before{content:'✓';color:var(--green);font-weight:600;flex-shrink:0}
+.cta-btn{display:block;background:var(--accent);color:#fff;font-size:16px;font-weight:500;padding:18px 40px;border-radius:10px;text-decoration:none;transition:all 0.2s;letter-spacing:-0.01em}
+.cta-btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.cta-fine{font-size:12px;color:var(--text3);margin-top:14px}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.4);padding:32px 5%;text-align:center;font-size:12px;font-family:var(--mono);line-height:2}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.6s ease forwards}
+.delay-1{animation-delay:0.1s;opacity:0}
+.delay-2{animation-delay:0.2s;opacity:0}
+.delay-3{animation-delay:0.3s;opacity:0}
+.delay-4{animation-delay:0.4s;opacity:0}
+
+@media(max-width:800px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .stats-grid,.how-grid,.models-grid{grid-template-columns:1fr}
+  .hero-card{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">RRP<span>.</span>TECH</div>
+  <a href="https://rrptech.gumroad.com/l/bevqo" class="nav-cta">Subscribe</a>
+</nav>
+
+<!-- TICKER -->
+<div style="margin-top:60px">
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">BTC $69,723 <span class="up">▲</span><span class="dot"></span></span>
+      <span class="ticker-item">BETTING RECORD 65-219 <span class="up">22.9% WR</span><span class="dot"></span></span>
+      <span class="ticker-item">BETTING P&L <span class="up">+$74,147</span><span class="dot"></span></span>
+      <span class="ticker-item">CRYPTO TRADES 160 CLOSED <span class="up">WINS: 69</span><span class="dot"></span></span>
+      <span class="ticker-item">REGIME STRONG_BULL<span class="dot"></span></span>
+      <span class="ticker-item">LOTTERY 113 GAMES TRACKED <span class="dot"></span></span>
+      <span class="ticker-item">AVG EDGE 869.7% <span class="dot"></span></span>
+      <span class="ticker-item">BTC $69,723 <span class="up">▲</span><span class="dot"></span></span>
+      <span class="ticker-item">BETTING RECORD 65-219 <span class="up">22.9% WR</span><span class="dot"></span></span>
+      <span class="ticker-item">BETTING P&L <span class="up">+$74,147</span><span class="dot"></span></span>
+      <span class="ticker-item">CRYPTO TRADES 160 CLOSED <span class="up">WINS: 69</span><span class="dot"></span></span>
+      <span class="ticker-item">REGIME STRONG_BULL<span class="dot"></span></span>
+      <span class="ticker-item">LOTTERY 113 GAMES TRACKED <span class="dot"></span></span>
+      <span class="ticker-item">AVG EDGE 869.7% <span class="dot"></span></span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade-up">Model-Driven Daily Intelligence</div>
+      <h1 class="hero-h1 fade-up delay-1">Every morning.<br>Every market.<br><em>Every edge.</em></h1>
+      <p class="hero-sub fade-up delay-2">RRP Technologies runs three quantitative models across sports betting, crypto, and NJ lottery — and delivers the top signals straight to your inbox before the day starts.</p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="https://rrptech.gumroad.com/l/bevqo" class="btn-primary">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          Get the Daily Brief
+        </a>
+        <a href="#how" class="btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-proof fade-up delay-4">
+        <div class="hero-proof-text">Betting model at <strong>22.9% win rate</strong> across 284 tracked bets &nbsp;·&nbsp; Updated April 06, 2026</div>
+      </div>
+    </div>
+
+    <!-- LIVE PREVIEW CARD -->
+    <div class="hero-card fade-up delay-2">
+      <div class="hc-header">
+        <div class="hc-title">Today's Brief</div>
+        <div class="hc-date">April 06, 2026</div>
+      </div>
+      <div class="hc-signal">
+        <div class="hc-signal-label">Crypto Market</div>
+        <div class="hc-signal-val" style="color:#4ade80">STRONG_BULL &nbsp;·&nbsp; BTC $69,723</div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-signal-label" style="font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:10px">Crypto Picks</div>
+      <div class="hc-picks">
+        <div class="hc-pick">
+          <span class="hc-pick-tag tag-buy">BUY</span>
+          <span class="hc-pick-coin">TAO</span>
+          <span class="hc-pick-detail">+momentum</span>
+          <span class="hc-pick-prob">68.0%</span>
+        </div>
+        <div class="hc-pick">
+          <span class="hc-pick-tag tag-buy">BUY</span>
+          <span class="hc-pick-coin">AAVE</span>
+          <span class="hc-pick-detail">+momentum</span>
+          <span class="hc-pick-prob">63.9%</span>
+        </div>
+        <div class="hc-pick hc-blur-row">
+          <span class="hc-pick-tag tag-watch">WATCH</span>
+          <span class="hc-pick-coin">SOL</span>
+          <span class="hc-pick-detail">watch level</span>
+          <span class="hc-pick-prob">58.9%</span>
+        </div>
+        <div class="hc-pick hc-blur-row">
+          <span class="hc-pick-tag tag-watch">WATCH</span>
+          <span class="hc-pick-coin">SUI</span>
+          <span class="hc-pick-detail">reload zone</span>
+          <span class="hc-pick-prob">53.2%</span>
+        </div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-lock">
+        <div class="hc-lock-text">+ Bets today, lottery pick, yesterday's results</div>
+        <a href="https://rrptech.gumroad.com/l/bevqo" class="hc-lock-btn">Unlock Full Brief →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="section-eyebrow">Live Performance</div>
+    <h2 class="section-h2">The numbers don't lie.</h2>
+    <p class="section-sub">All stats are pulled live from our model logs every time this page is generated. Updated April 06, 2026.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-system">Project Carbon — Sports Betting</div>
+        <div class="stat-value pos">+$74,147</div>
+        <div class="stat-label">Total P&L (Kelly-sized)</div>
+        <div class="stat-meta">
+          <div class="stat-row"><span class="stat-row-label">Record</span><span class="stat-row-val">65-219</span></div>
+          <div class="stat-row"><span class="stat-row-label">Win Rate</span><span class="stat-row-val">22.9%</span></div>
+          <div class="stat-row"><span class="stat-row-label">Avg Edge</span><span class="stat-row-val">869.7%</span></div>
+          <div class="stat-row"><span class="stat-row-label">Best Book</span><span class="stat-row-val">FanDuel</span></div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-system">Project Acorn — Crypto</div>
+        <div class="stat-value pos">-$2,144</div>
+        <div class="stat-label">Closed trade P&L</div>
+        <div class="stat-meta">
+          <div class="stat-row"><span class="stat-row-label">Total Trades</span><span class="stat-row-val">160</span></div>
+          <div class="stat-row"><span class="stat-row-label">Winning Trades</span><span class="stat-row-val">69</span></div>
+          <div class="stat-row"><span class="stat-row-label">BTC Price</span><span class="stat-row-val">$69,723</span></div>
+          <div class="stat-row"><span class="stat-row-label">Regime</span><span class="stat-row-val">STRONG_BULL</span></div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-system">Project MoneyTree — NJ Lottery</div>
+        <div class="stat-value" style="font-size:28px;color:var(--gold)">EV-Tracked</div>
+        <div class="stat-label">Paper portfolio, research only</div>
+        <div class="stat-meta">
+          <div class="stat-row"><span class="stat-row-label">Active Games</span><span class="stat-row-val">113</span></div>
+          <div class="stat-row"><span class="stat-row-label">Avg EV/Dollar</span><span class="stat-row-val">-46.1%</span></div>
+          <div class="stat-row"><span class="stat-row-label">Method</span><span class="stat-row-val">RF + Monte Carlo</span></div>
+          <div class="stat-row"><span class="stat-row-label">Coverage</span><span class="stat-row-val">All NJ games</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-h2">Three models. One brief.</h2>
+    <p class="section-sub">Every morning our pipelines run automatically, score every market, and distill the top signals into a single email.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01 &nbsp;—&nbsp; SPORTS BETTING</div>
+        <div class="how-title">Arbitrage Scanner</div>
+        <div class="how-body">Scans live lines across FanDuel, BetUS, DraftKings, and more. Identifies positive-EV mispricing using a dual-brain model — logistic regression + random forest — and sizes bets with half-Kelly criteria.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02 &nbsp;—&nbsp; CRYPTO</div>
+        <div class="how-title">BTC Regime + Sniper</div>
+        <div class="how-body">A BTC macro model classifies the daily regime (Strong Bull → Strong Bear) and gates deployment. A separate momentum sniper scans 100+ coins for high-probability breakout setups, ranked by directional confidence.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03 &nbsp;—&nbsp; LOTTERY</div>
+        <div class="how-title">NJ Scratch-Off Engine</div>
+        <div class="how-body">Scrapes all active NJ Lottery games daily, computes EV per dollar, runs 10,000-ticket Monte Carlo simulations, and trains a Random Forest on historical prize depletion data to rank the best plays.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS DEEP DIVE -->
+<section class="models">
+  <div class="models-inner">
+    <div class="section-eyebrow">Under the Hood</div>
+    <h2 class="section-h2">Built on real quant infrastructure.</h2>
+    <p class="section-sub">Not tips. Not gut calls. Trained models, live data pipelines, and documented track records.</p>
+    <div class="models-grid">
+      <div class="model-card">
+        <div class="model-icon">📊</div>
+        <div class="model-title">Dual-Brain Betting Model</div>
+        <div class="model-body">Logistic regression scores implied probability from market odds. A random forest cross-validates the edge. Only bets where both models agree pass the final signal gate.</div>
+        <div class="model-stat">Clyp score threshold: <strong>60+</strong> &nbsp;·&nbsp; Min edge: <strong>5%</strong></div>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">₿</div>
+        <div class="model-title">BTC Quant Regime Model</div>
+        <div class="model-body">800-tree random forest trained on 190k+ BTC 1-minute candles. Generates 7-horizon forecasts from 1 minute to 24 hours. Regime strength gates crypto capital deployment.</div>
+        <div class="model-stat">Model AUC: <strong>0.641</strong> &nbsp;·&nbsp; 7 horizons &nbsp;·&nbsp; 89 features</div>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">🎰</div>
+        <div class="model-title">Scratch-Off RF Engine</div>
+        <div class="model-body">Trains on rolling prize pool depletion history. Monte Carlo simulates 10,000 tickets per game. Session optimizer finds the minimum ticket count needed to hit a 50% profit probability.</div>
+        <div class="model-stat">Games tracked: <strong>113</strong> &nbsp;·&nbsp; Daily scrape + score</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE BRIEF -->
+<section class="sample">
+  <div class="sample-inner">
+    <div class="section-eyebrow">Sample Brief</div>
+    <h2 class="section-h2">This is what lands in your inbox.</h2>
+    <p class="section-sub">Every morning before the market opens. Plain text, zero noise, pure signal.</p>
+    <div class="sample-window">
+      <div class="sample-topbar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="sample-title">RRP TECHNOLOGIES — DAILY PORTFOLIO BRIEF &nbsp;·&nbsp; APRIL 06, 2026</div>
+      </div>
+      <div class="sample-body">
+        <div class="s-head">Crypto Market</div>
+        <div class="s-val">Signal: <span class="s-green">BUY</span> — Bitcoin is at $69,723 and conditions are strongly bullish. The model gives a 74.1% chance of prices moving higher over the next 24 hours.</div>
+        <br>
+        <div class="s-val"><span class="s-green">BUY &nbsp;</span> TAO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +momentum &nbsp;(68.0%)</div>
+        <div class="s-val"><span class="s-green">BUY &nbsp;</span> AAVE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +momentum &nbsp;(63.9%)</div>
+        <div class="s-val"><span class="s-gold">WATCH</span> SOL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; watch level &nbsp;(58.9%)</div>
+        <hr class="s-rule">
+        <div class="s-head">Bets Today</div>
+        <div class="sample-blur">
+          <div class="s-val">BEST BET &nbsp; NCAAB: Sacramento St ML — Sacramento St @ Portland</div>
+          <div class="s-dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Book: FanDuel &nbsp;|&nbsp; Edge: 13.4%</div>
+          <div class="s-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NCAAB: Portland Pilots ML — Sacramento St @ Portland</div>
+          <div class="s-dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Book: BetUS &nbsp;|&nbsp; Edge: 10.6%</div>
+        </div>
+        <hr class="s-rule">
+        <div class="sample-blur">
+          <div class="s-head">Lottery</div>
+          <div class="s-val">BUY &nbsp; $1,000,000 Extravaganza @ $30 &nbsp;[VALUE SPIKE]</div>
+          <div class="s-dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EV: -18.2% &nbsp;|&nbsp; 24.1% win prob</div>
+        </div>
+      </div>
+      <div class="sample-gate">
+        <div class="sample-gate-text">Bets, lottery picks, and yesterday's results are subscriber-only.</div>
+        <a href="https://rrptech.gumroad.com/l/bevqo" class="sample-gate-btn">Subscribe to Unlock →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Start your edge tomorrow.</h2>
+    <p>One email. Three markets. Every morning before the day starts.</p>
+    <div class="cta-price">
+      <span class="cta-price-amt">$29</span>
+      <span class="cta-price-per">/ month</span>
+    </div>
+    <div class="cta-features">
+      <div class="cta-feature">Daily crypto picks with BTC regime signal and probability scores</div>
+      <div class="cta-feature">Sports betting signals — only positive-EV, model-confirmed plays</div>
+      <div class="cta-feature">NJ Lottery paper trade of the day with session optimizer</div>
+      <div class="cta-feature">Yesterday's results for every system, every trade logged</div>
+      <div class="cta-feature">Plain English market condition — no jargon, just what to do</div>
+    </div>
+    <a href="https://rrptech.gumroad.com/l/bevqo" class="cta-btn">Get the Daily Brief — $29/mo</a>
+    <div class="cta-fine">Cancel anytime. Stats updated April 06, 2026.</div>
+  </div>
+</section>
+
+<footer>
+  <div>RRP Technologies &nbsp;·&nbsp; Generated April 06, 2026</div>
+  <div style="margin-top:8px;max-width:700px;margin-left:auto;margin-right:auto">
+    This page and its contents are generated by automated systems for informational purposes only. Nothing herein constitutes financial, investment, or legal advice. All model outputs, signals, and statistics reflect historical or simulated performance and do not guarantee future results. Cryptocurrency trading and sports betting involve substantial risk of loss. Past performance is not indicative of future results. Lottery picks are paper trades tracked for EV research only. RRP Technologies assumes no liability for any decisions made based on this content.
+  </div>
+</footer>
+
+</body>
+</html>
