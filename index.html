@@ -482,8 +482,8 @@ footer{background:var(--ink);color:rgba(255,255,255,0.4);padding:32px 5%;text-al
       Sports betting and cryptocurrency trading involve <strong>substantial risk of loss</strong>. Lottery picks are paper trades tracked for EV research only. Past performance does not guarantee future results.<br><br>
       You must be <strong>21 or older</strong> to participate in sports betting or gambling activities where applicable. Please gamble responsibly. If you or someone you know has a gambling problem, call <strong>1-800-GAMBLER</strong>.
     </div>
-    <div class="modal-check" onclick="toggleCheck()">
-      <input type="checkbox" id="ageCheck">
+    <div class="modal-check">
+      <input type="checkbox" id="ageCheck" onclick="toggleCheck(event)">
       <label for="ageCheck">I confirm I am 21 or older, I understand this content is for informational purposes only, and I accept full responsibility for any decisions I make.</label>
     </div>
     <button class="modal-btn" id="modalConfirmBtn" disabled onclick="confirmAndRedirect()">I Understand — Continue</button>
@@ -502,9 +502,9 @@ function openDisclaimer(url) {
   document.getElementById('modalConfirmBtn').disabled = true;
 }
 
-function toggleCheck() {
+function toggleCheck(e) {
+  if (e) e.stopPropagation();
   var cb = document.getElementById('ageCheck');
-  cb.checked = !cb.checked;
   var btn = document.getElementById('modalConfirmBtn');
   if (cb.checked) {
     btn.classList.add('ready');
